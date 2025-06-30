@@ -1,25 +1,20 @@
 describe('Login Test on ToolJet Cypress QA site', () => {
   it('should log in with valid credentials', () => {
-    // Visit the site
     cy.visit('https://v3-lts-eetestsystem.tooljet.com/login/cypress-qa?redirectTo=/');
 
-    // Enter username
     cy.get('#email')
       .should('be.visible')
       .type('intern@example.com');
 
-    // Enter password
     cy.get('#password')
       .should('be.visible')
       .type('password');
 
-    // Click Sign In
     cy.contains('button', 'Sign in')
       .should('be.visible')
       .click();
 
-    // You can add assertion to confirm login
-    cy.url().should('not.include', '/login'); // adjust based on actual URL change
+    cy.url().should('not.include', '/login');
 
     cy.title().should('eq', 'Dashboard | ToolJet');
 
@@ -27,20 +22,20 @@ describe('Login Test on ToolJet Cypress QA site', () => {
        return false;
       });
 
-    cy.contains('h3', 'RithishRename')         // Locate the visible title
-  .should('be.visible')              // Ensure it's visible
-  .parents('[class="homepage-app-card-list-item"]')  // Go to card container
-  .trigger('mouseover')             // Hover to reveal buttons
+    cy.contains('h3', 'RithishRename')
+  .should('be.visible')
+  .parents('[class="homepage-app-card-list-item"]')
+  .trigger('mouseover')
   .within(() => {
-    cy.get('[data-cy="app-card-menu-icon"]')  // Now find the edit button inside
+    cy.get('[data-cy="app-card-menu-icon"]')
       .click({ force: true });
   });
   
-  cy.get('[data-cy="delete-app-card-option"]')                         // Look for Rename option in dropdown
+  cy.get('[data-cy="delete-app-card-option"]')
   .should('be.visible')
   .click();
 
-  cy.get('[data-cy="yes-button"]')                         // Look for Rename option in dropdown
+  cy.get('[data-cy="yes-button"]')
   .should('be.visible')
   .click();
 
